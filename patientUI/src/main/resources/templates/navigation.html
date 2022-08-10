@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="/css/style.css" rel="stylesheet">
+    <title>Mediscreen</title>
+</head>
+
+<body>
+
+<div th:fragment="navigationBar" class="fixed-top">
+    <!-------------------------------------------------  Logo and slogan  -------------------------------------------------->
+    <nav class="nav justify-content-between bg-white">
+        <nav class="nav">
+            <a class="nav-link" href="/">
+                <img class="img-fluid " th:src="@{/images/mediscreenSmallLogo.png}"
+                     alt="Mediscreen logo"/>
+
+            </a>
+            <a class="nav-link" href="/">
+                <h2 class=" fw-bolder text-dark mt-2">Mediscreen</h2>
+            </a>
+        </nav>
+        <a class="nav-link justify-contents-center m-0 px-4 d-none d-md-block">
+            <p class="text-dark text-center m-0 p-0">Detecting risk factors for diabetes.</p>
+            <h5 class="fw-bolder text-dark text-center m-0 p-0">We care.</h5>
+        </a>
+    </nav>
+
+    <!-------------------------------------------------  Navigation bar  -------------------------------------------------->
+
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-bolder mx-4" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-bolder mx-4" href="/patient/addPatient">New Patient</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-bolder mx-4" href="/patient/getAllPatients">Select Patient</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+</div>
+
+
+<div th:fragment="bottomBar" class="sticky-bottom" >
+
+    <!-------------------------------------------------  Bottom bar  -------------------------------------------------->
+
+    <nav class="navbar bg-dark">
+    </nav>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>
