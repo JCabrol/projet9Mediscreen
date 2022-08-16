@@ -27,4 +27,42 @@ $pagination-color:$dark;
 
 $enable-negative-margins: true;
 
+$utilities: (
+  "width": (
+        property: width,
+        class: w,
+        values: (
+          25: 25%,
+          50: 50%,
+          75: 75%,
+          100: 100%,
+          600:600%,
+          750:750%,
+          auto: auto
+        ),
+        )
+);
+
+
+// @media (max-width: 767px){
+// .textArea
+// {width: 295px !important;
+// height:300px !important;}
+// }
+//
+// @media (min-width: 768px) and (max-width: 991px){
+// .textArea
+// {width: 495px !important;
+// height:300px !important;}
+// }
+// @media (min-width: 992px){
+// .textArea
+// {width: 795px !important;
+// height:400px !important;}
+// }
+
+$tooltip-bg:$dark;
+
+
+
 @import "../node_modules/bootstrap/scss/bootstrap.scss";

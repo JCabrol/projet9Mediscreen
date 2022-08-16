@@ -41,8 +41,8 @@ public class PatientServiceImpl implements PatientService {
      * Get a patient by its id.
      *
      * @param id the id of the researched patient
-     * @throws ObjectNotFoundException if no patient is found with this id
      * @return a PatientDTO object
+     * @throws ObjectNotFoundException if no patient is found with this id
      */
     @Override
     public PatientDTO getPatientById(Integer id) throws ObjectNotFoundException {
@@ -62,7 +62,7 @@ public class PatientServiceImpl implements PatientService {
      * If there is not any corresponding result, an empty list is returned.
      *
      * @param familyName the familyName of the researched patient
-     * @param givenName the givenName of the researched patient
+     * @param givenName  the givenName of the researched patient
      * @return a list of PatientDTO objects
      */
     @Override
@@ -98,7 +98,7 @@ public class PatientServiceImpl implements PatientService {
     /**
      * Update an existing patient.
      *
-     * @param patientId the id of the patient to update
+     * @param patientId  the id of the patient to update
      * @param patientDTO an InfoPatientToUpdateDTO object containing all new information to update a patient
      * @throws ObjectNotFoundException if the patient is not found by its id
      */
@@ -162,7 +162,11 @@ public class PatientServiceImpl implements PatientService {
         patientDTO.setDateOfBirth(patient.getDateOfBirth().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         patientDTO.setSex(patient.getSex().toString());
         patientDTO.setPhone(patient.getPhone());
-        patientDTO.setAge(LocalDate.now().compareTo(patient.getDateOfBirth()));
+        int age = LocalDate.now().compareTo(patient.getDateOfBirth());
+        if (LocalDate.now().getDayOfYear() < patient.getDateOfBirth().getDayOfYear()) {
+            age = age - 1;
+        }
+        patientDTO.setAge(age);
         return patientDTO;
     }
 
