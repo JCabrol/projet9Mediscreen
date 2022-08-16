@@ -12,13 +12,16 @@
             <relativePath/> <!-- lookup parent from repository -->
         </parent>
 
+	<groupId>mediscreen</groupId>
     <artifactId>patientInformation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <!-- ================== General Information ================= -->
     <name>patientInformation</name>
     <description>API for managing patient information</description>
     <url>http://localhost:8081/</url>
+
     <!-- =============================================== Properties ================================================ -->
 
     <properties>
