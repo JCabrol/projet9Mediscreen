@@ -95,8 +95,8 @@ public class PatientUIServiceImpl implements PatientUIService {
     public List<MedicalNoteBean> createPreviewContentList(List<MedicalNoteBean> medicalNoteList) {
         for (MedicalNoteBean medicalNote : medicalNoteList) {
             String preview = medicalNote.getNoteContent().replaceAll("<[^>]*>", " ");
-            if (preview.chars().count() > 100) {
-                preview = preview.substring(0, 97) + "...";
+            if (preview.chars().count() > 90) {
+                preview = preview.substring(0, 87) + "...";
             }
             medicalNote.setNoteContent(preview);
         }

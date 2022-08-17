@@ -14,15 +14,17 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<artifactId>patientUI</artifactId>
+
+	<groupId>mediscreen</groupId>
+	<artifactId>patientRisk</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- ================== General Information ================= -->
 
-	<name>patientUI</name>
-	<description>User interface for manage patient information, medical notes and display diabetes risk.</description>
-	<url>http://localhost:8083/</url>
+	<name>patientRisk</name>
+	<description>Microservice to calculate diabetes risk for patients into mediscreen project</description>
+	<url>http://localhost:8080/</url>
 
 	<!-- =============================================== Properties ================================================ -->
 
@@ -35,12 +37,9 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -57,17 +56,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.springdoc</groupId>-->
-<!--			<artifactId>springdoc-openapi-ui</artifactId>-->
-<!--			<version>1.6.9</version>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
