@@ -24,6 +24,7 @@
         <option value="$PROJECT_DIR$/patientInformation/pom.xml" />
         <option value="$PROJECT_DIR$/patientUI/pom.xml" />
         <option value="$PROJECT_DIR$/medicalNotes/pom.xml" />
+        <option value="$PROJECT_DIR$/patientRisk/pom.xml" />
       </list>
     </option>
   </component>

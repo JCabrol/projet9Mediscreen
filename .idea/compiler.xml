@@ -11,6 +11,7 @@
         <module name="patientInformation" />
         <module name="patientUI" />
         <module name="mediscreen" />
+        <module name="patientRisk" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="medicalNotes" options="-parameters" />
       <module name="patientInformation" options="-parameters" />
+      <module name="patientRisk" options="-parameters" />
       <module name="patientUI" options="-parameters" />
     </option>
   </component>

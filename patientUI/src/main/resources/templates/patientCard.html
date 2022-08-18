@@ -41,6 +41,7 @@
             <!-------------------------------------  Administrative information  -------------------------------------->
 
             <div class="m-2 border border-dark rounded">
+                <h4 class="text-center">Contact information :</h4>
                 <h5 class="m-4"><i class="bi bi-envelope"></i> <span th:text="${patientBean.address}"></span></h5>
                 <h5 class="m-4"><i class="bi bi-telephone"></i> <span th:text="${patientBean.phone}"></span></h5>
 
@@ -49,8 +50,9 @@
             <!-----------------------------------------  Changing information  ---------------------------------------->
 
             <div class="m-2 mb-6 border justify-content-center border-dark rounded">
-                <h5 class="m-4">Click below to modify information</h5>
-                <div class="row justify-content-center mb-2">
+                <h4 class="text-center">Modifications :</h4>
+                <h6 class="m-4">Click below if you want to modify patient information</h6>
+                <div class="row justify-content-center mt-4 mb-2">
                     <a class="btn btn-dark d-block text-light col-md-6 mb-2" data-toggle="collapse" href="#collapseForm"
                        role="button"
                        aria-expanded="false" aria-controls="collapseForm">
@@ -177,6 +179,17 @@
 
         <div class="col-12 col-md-7 mt-6 text-dark">
             <div class="m-2 border border-dark rounded">
+                <h4 class="text-center">Diabetes assessment :</h4>
+                <div th:switch="${diabetesRisk}">
+                   <h5 th:case="'NONE'"  class="py-2 d-block offset-4 col-4 text-center text-success border border-success rounded bg-success bg-opacity-10" ><i class="bi bi-check-circle "></i> None</h5>
+                    <h5 th:case="'BORDERLINE'"  class="py-2 d-block offset-4 col-4 text-center text-warning border border-warning rounded bg-warning bg-opacity-10"><i class="bi bi-dash-circle"></i> Borderline</h5>
+                   <h5 th:case="'IN_DANGER'" class="py-2 d-block offset-4 col-4 text-center text-secondary border border-secondary rounded bg-secondary bg-opacity-10"><i class="bi bi-exclamation-circle"></i> In Danger</h5>
+                    <h5 th:case="'EARLY_ONSET'"  class="py-2 d-block offset-4 col-4 text-center text-danger border border-danger rounded bg-danger bg-opacity-10"><i class="bi bi-x-circle"></i> Early Onset</h5>
+                </div>
+            </div>
+
+
+            <div class="m-2 border border-dark rounded">
                 <h4 class="text-center">Medical notes :</h4>
 
                 <h5 class="mt-2 text-center" th:if="${medicalNotesToDisplay.medicalNoteList.size}==0">
@@ -185,7 +198,7 @@
 
                 <!------------------------------------  Medical notes table ------------------------------------------->
 
-                <div class="row justify-content-center mt-2">
+                <div class="row justify-content-center mt-2 mb-0">
                     <div th:if="${medicalNotesToDisplay.medicalNoteList.size}!=0" class="col-md-10 col-12 ">
                         <div class="table-responsive">
                             <table class="table table-light table-striped table-hover table-borderless align-middle border border-dark rounded table-rounded">
@@ -236,9 +249,9 @@
 
                 <!-------------------------------------------------  Pagination  -------------------------------------------------->
 
-                <nav class="mb-2" th:if="${medicalNotesToDisplay.totalNumberOfPages}>1"
+                <nav class="mt-0" th:if="${medicalNotesToDisplay.totalNumberOfPages}>1"
                      aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
+                    <ul class="pagination pagination-sm justify-content-center">
 
                         <!-------------------------------------------------  First page  -------------------------------------------------->
 
