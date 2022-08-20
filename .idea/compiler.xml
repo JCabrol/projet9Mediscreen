@@ -2,19 +2,24 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="medicalNotes" />
         <module name="patientInformation" />
         <module name="patientUI" />
         <module name="mediscreen" />
+        <module name="patientRisk" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="medicalNotes" options="-parameters" />
       <module name="patientInformation" options="-parameters" />
+      <module name="patientRisk" options="-parameters" />
       <module name="patientUI" options="-parameters" />
     </option>
   </component>

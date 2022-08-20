@@ -22,7 +22,7 @@
 
 	<name>patientUI</name>
 	<description>User interface for manage patient information, medical notes and display diabetes risk.</description>
-	<url>http://localhost:8080/</url>
+	<url>http://localhost:8083/</url>
 
 	<!-- =============================================== Properties ================================================ -->
 

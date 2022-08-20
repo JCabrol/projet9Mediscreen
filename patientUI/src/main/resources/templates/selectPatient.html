@@ -31,17 +31,21 @@
             </h4>
 
             <h4 th:if="${linkedFrom == 'research'}"> Result for searching
-                <span class="fw-semibold fst-italic text-uppercase" th:if="${familyName != null}" th:text="${familyName}"></span>
+                <span class="fw-semibold fst-italic text-uppercase" th:if="${familyName != null}"
+                      th:text="${familyName}"></span>
                 <span class="fw-semibold fst-italic" th:if="${givenName != null}" th:text="${givenName}"></span>
             </h4>
 
-            <h5 class="mt-4" th:if="${listOfPatientsToDisplay.patientList.size}!=0">Select a patient in the list to visualize his card :
+            <h5 class="mt-4" th:if="${listOfPatientsToDisplay.patientList.size}!=0">Select a patient in the list to
+                visualize his card :
             </h5>
 
-            <h5 class="mt-4" th:if="${listOfPatientsToDisplay.patientList.size}==0 and ${linkedFrom == 'research'}">Sorry, there is no result for your research.
+            <h5 class="mt-4" th:if="${listOfPatientsToDisplay.patientList.size}==0 and ${linkedFrom == 'research'}">
+                Sorry, there is no result for your research.
             </h5>
 
-            <h5 class="mt-4" th:if="${listOfPatientsToDisplay.patientList.size}==0 and ${linkedFrom == 'allPatients'}">There is not any patient registered yet.
+            <h5 class="mt-4" th:if="${listOfPatientsToDisplay.patientList.size}==0 and ${linkedFrom == 'allPatients'}">
+                There is not any patient registered yet.
             </h5>
 
             <!-------------------------------------------------  Patient table -------------------------------------------------->
@@ -71,22 +75,27 @@
                             <tbody>
                             <tr scope="row" th:each="patient : ${listOfPatientsToDisplay.patientList}">
 
-                                <a th:href="@{/patient/getPatient/{patientId}(patientId=${patient.patientId})}"> <td class="text-center text-uppercase fw-bolder text-dark"
-                                    th:text="${patient.familyName}"></td></a>
+                                <a th:href="@{/getPatient/{patientId}(patientId=${patient.patientId})}">
+                                    <td class="text-center text-uppercase fw-bolder text-dark"
+                                        th:text="${patient.familyName}"></td>
+                                </a>
                                 <td class="text-center fw-bolder text-dark"
-                                    th:href="@{/patient/getPatient/{patientId}(patientId=${patient.patientId})}" th:text="${patient.givenName}"></td>
+                                    th:href="@{/getPatient/{patientId}(patientId=${patient.patientId})}"
+                                    th:text="${patient.givenName}"></td>
                                 <td class="text-center" th:text="${patient.sex}"></td>
                                 <td class="text-center" th:text="${patient.dateOfBirth}"></td>
                                 <td class="text-center d-none d-lg-table-cell" th:text="${patient.phone}"></td>
                                 <td class="text-center d-none d-lg-table-cell" th:text="${patient.address}"></td>
                                 <td class="text-center">
                                     <a th:href="@{/patient/getPatient/{patientId}(patientId=${patient.patientId})}">
-                                        <i class="fa-solid fa-eye text-dark"></i>
+                                        <i class="fa-solid fa-eye text-dark" data-toggle="tooltip" data-placement="left"
+                                           data-title="See the patient card"></i>
                                     </a>
                                 </td>
                                 <td class="text-center">
                                     <a th:href="@{/patient/delete/{patientId}(patientId=${patient.patientId})}">
-                                        <i class="fa-solid fa-trash-can text-dark"></i>
+                                        <i class="fa-solid fa-trash-can text-dark" data-toggle="tooltip" data-placement="left"
+                                           data-title="Delete patient"></i>
                                     </a>
                                 </td>
 
@@ -125,21 +134,30 @@
 
                     <!-------------------------------------------------  Displayed pages  -------------------------------------------------->
 
-                    <li class="page-item" th:each="page : ${listOfPatientsToDisplay.pagesToDisplay}" th:if="${page!=null and linkedFrom == 'allPatients'}">
-                        <a class="page-link" th:href="@{/patient/getAllPatients(currentPage=${page})}" th:text="${page}"></a>
+                    <li class="page-item" th:each="page : ${listOfPatientsToDisplay.pagesToDisplay}"
+                        th:if="${page!=null and linkedFrom == 'allPatients'}">
+                        <a class="page-link" th:href="@{/patient/getAllPatients(currentPage=${page})}"
+                           th:text="${page}"></a>
                     </li>
 
-                    <li class="page-item" th:each="page : ${listOfPatientsToDisplay.pagesToDisplay}" th:if="${page!=null and linkedFrom == 'research'}">
-                        <a class="page-link" th:href="@{/patient/getPatient(currentPage=${page},familyName=${familyName},givenName=${givenName})}" th:text="${page}"></a>
+                    <li class="page-item" th:each="page : ${listOfPatientsToDisplay.pagesToDisplay}"
+                        th:if="${page!=null and linkedFrom == 'research'}">
+                        <a class="page-link"
+                           th:href="@{/patient/getPatient(currentPage=${page},familyName=${familyName},givenName=${givenName})}"
+                           th:text="${page}"></a>
                     </li>
 
                     <!-------------------------------------------------  Last page  -------------------------------------------------->
                     <li class="page-item">
-                        <a class="page-link" th:if="${linkedFrom == 'allPatients'}" th:href="@{/patient/getAllPatients(currentPage=${listOfPatientsToDisplay.totalNumberOfPages})}" aria-label="Last">
+                        <a class="page-link" th:if="${linkedFrom == 'allPatients'}"
+                           th:href="@{/patient/getAllPatients(currentPage=${listOfPatientsToDisplay.totalNumberOfPages})}"
+                           aria-label="Last">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
 
-                        <a class="page-link" th:if="${linkedFrom == 'research'}" th:href="@{/patient/getPatient(currentPage=${listOfPatientsToDisplay.totalNumberOfPages},familyName=${familyName},givenName=${givenName})}" aria-label="Last">
+                        <a class="page-link" th:if="${linkedFrom == 'research'}"
+                           th:href="@{/patient/getPatient(currentPage=${listOfPatientsToDisplay.totalNumberOfPages},familyName=${familyName},givenName=${givenName})}"
+                           aria-label="Last">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
 
@@ -153,7 +171,9 @@
             <!-------------------------------------------------  Reinitialisation list button (only when research)  -------------------------------------------------->
 
             <div class="row justify-content-center mb-4 mb-md-6">
-                <a th:if="${linkedFrom == 'research'}" th:href="@{/patient/getAllPatients}" class="btn btn-dark d-block text-light fw-bolder col-md-4 col-6" type="button">See all patients list</a>
+                <a th:if="${linkedFrom == 'research'}" th:href="@{/patient/getAllPatients}"
+                   class="btn btn-dark d-block text-light fw-bolder col-md-4 col-6" type="button">See all patients
+                    list</a>
             </div>
 
             <!----------------------------------------------------------------------------------------------------------------------------->
@@ -166,21 +186,22 @@
 
             <!-------------------------------------------------  Title and subtitle  -------------------------------------------------->
 
-                <h4> Or search a patient</h4>
+            <h4> Or search a patient</h4>
 
-                <h5 class="mt-4">Enter a family name and/or a given name to search :</h5>
+            <h5 class="mt-4">Enter a family name and/or a given name to search :</h5>
 
             <!-------------------------------------------------  Research form  -------------------------------------------------->
 
             <div class="row justify-content-center mt-6 mb-4 mx-2">
-                <form class="row col-md-10 col-12 justify-content-center border border-dark border-opacity-30 rounded" method="post" th:action="@{/patient/getPatient}" th:object="${patientSearch}">
+                <form method="post" th:object="${patientSearch}" th:action="@{/patient/searchPatient}" class="row col-md-10 col-12 justify-content-center border border-dark border-opacity-30 rounded">
 
                     <!-------------------------------------------------  Family name  -------------------------------------------------->
 
                     <div class="col-12 col-md-8 mt-4">
 
-                        <label for="inputFamilyName" class="form-label fs-5">Family name</label>
-                        <input th:field="*{familyName}" type="text" class="form-control" id="inputFamilyName" placeholder="Family name">
+                        <label class="form-label fs-5">Family name</label>
+                        <input type="text" class="form-control" id="inputFamilyName" th:field="*{familyName}"
+                               placeholder="Family name">
 
                     </div>
 
@@ -188,8 +209,9 @@
 
                     <div class="col-12 col-md-8 m-2">
 
-                        <label for="inputGivenName" class="form-label fs-5">Given name</label>
-                        <input th:field="*{givenName}" type="text" class="form-control" id="inputGivenName" placeholder="Given name">
+                        <label class="form-label fs-5">Given name</label>
+                        <input type="text" class="form-control" id="inputGivenName" th:field="*{givenName}"
+                               placeholder="Given name">
 
                     </div>
 
@@ -197,7 +219,7 @@
 
                     <div class="d-grid gap-2 mx-auto col-12 col-md-8 my-4">
 
-                        <button class="btn btn-dark text-light" type="submit">Search</button>
+                        <button class="btn btn-dark text-light" type="submit" >Search</button>
 
                     </div>
 
@@ -223,6 +245,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/f923d597fd.js" crossorigin="anonymous"></script>
 
+<script>
+const tooltipTriggerList = document.querySelectorAll('[data-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 
 </body>
 </html>
