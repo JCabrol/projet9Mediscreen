@@ -1,0 +1,87 @@
+#version: "3"
+services:
+
+  mysql_db:
+    image: "mysql:8.0"
+    volumes:
+      - mysql_db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: patient
+      MYSQL_ROOT_PASSWORD: Super1411!
+    cap_add:
+      - SYS_NICE
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongo_db_data:/data/db
+      - mongo_config:/data/configdb
+    restart: always
+    ports:
+      - "27018:27017"
+
+  patientUI:
+    depends_on:
+      - patientInformation
+      - medicalNotes
+      - patientRisk
+    image: patient_ui:1.0
+    build:
+      context: patientUI
+    ports:
+      - "8083:8083"
+    restart: always
+    environment:
+      PATIENT_INFORMATION_PROXY_URL: http://patientInformation:8081
+      MEDICAL_NOTES_PROXY_URL: http://medicalNotes:8082
+      PATIENT_RISK_PROXY_URL: http://medicalRisk:8080
+
+  patientInformation:
+    image: patient_information:1.0
+    build:
+      context: patientInformation
+    depends_on:
+      - mysql_db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db/patient?serverTimezone=Europe/Paris
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Super1411!
+    ports:
+      - "8081:8081"
+    restart: always
+
+  medicalNotes:
+    image: medical_notes:1.0
+    build:
+      context: medicalNotes
+    depends_on:
+      - mongodb
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: mediscreen
+    ports:
+      - "8082:8082"
+    restart: always
+
+  patientRisk:
+    depends_on:
+      - patientInformation
+      - patientMedicalNote
+    image: patient_risk:1.0
+    build:
+      context: patientRisk
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      PATIENT_INFORMATION_PROXY_URL: http://patientInformation:8081
+      MEDICAL_NOTES_PROXY_URL: http://medicalNotes:8082
+
+volumes:
+  mysql_db_data: {}
+  mongo_db_data: {}
+  mongo_config: {}
