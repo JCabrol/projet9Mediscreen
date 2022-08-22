@@ -8,8 +8,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -41,4 +43,12 @@ public class PatientUIExceptionHandler extends ResponseEntityExceptionHandler {
         return new ModelAndView(viewName, model);
     }
 
+    @ExceptionHandler(ObjectNotFoundException.class)
+    protected ModelAndView handleNotFoundObject(
+            ObjectNotFoundException ex) {
+        PatientUIError patientUIError = new PatientUIError(NOT_FOUND);
+        patientUIError.setMessage(ex.getMessage());
+        log.error(ex.getMessage());
+        return buildErrorPage(patientUIError);
+    }
 }
