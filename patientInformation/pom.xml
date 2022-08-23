@@ -229,4 +229,10 @@
             </plugin>
         </plugins>
     </build>
+	<distributionManagement>
+		<site>
+			<id>patientInformation</id>
+			<url>file://C:/Users/CABROL/Documents/Justine/projet9/mediscreen/patientInformation/target/site</url>
+		</site>
+	</distributionManagement>
 </project>

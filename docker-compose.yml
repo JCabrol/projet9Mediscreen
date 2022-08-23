@@ -9,9 +9,8 @@ services:
     ports:
       - "3308:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: Super1411!
       MYSQL_DATABASE: patient
-      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: Super1411!
 
     cap_add:
       - SYS_NICE
@@ -39,7 +38,7 @@ services:
     environment:
       PATIENT_INFORMATION_PROXY_URL: http://patientInformation:8081
       MEDICAL_NOTES_PROXY_URL: http://medicalNotes:8082
-      PATIENT_RISK_PROXY_URL: http://medicalRisk:8080
+      PATIENT_RISK_PROXY_URL: http://patientRisk:8080
 
   patientInformation:
     image: patient_information:1.0
@@ -48,7 +47,7 @@ services:
     depends_on:
       - mysql_db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db/patient?serverTimezone=Europe/Paris
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db/patient?serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=Super1411!
     ports:

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@FeignClient(name = "patientInformation", url = "localhost:8081")
+@FeignClient(name = "patientInformation", url = "${patient.information.proxy.url}")
 public interface PatientInformationProxy {
 
     @GetMapping(value = "/patient/getAll")
