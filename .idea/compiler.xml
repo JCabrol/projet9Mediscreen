@@ -10,7 +10,6 @@
         <module name="medicalNotes" />
         <module name="patientInformation" />
         <module name="patientUI" />
-        <module name="mediscreen" />
         <module name="patientRisk" />
       </profile>
     </annotationProcessing>

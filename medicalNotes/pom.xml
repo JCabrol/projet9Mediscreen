@@ -217,4 +217,12 @@
 		</plugins>
 	</build>
 
+
+		<distributionManagement>
+			<site>
+				<id>medicalNote</id>
+				<url>file://C:/Users/CABROL/Documents/Justine/projet9/mediscreen/medicalNotes/target/site</url>
+			</site>
+		</distributionManagement>
+
 </project>

@@ -9,3 +9,4 @@ CREATE TABLE patient_information (
                 PRIMARY KEY (patient_id)
 );
 
+

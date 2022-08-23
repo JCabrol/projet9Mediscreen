@@ -7,10 +7,75 @@
     <groupId>org.example</groupId>
     <artifactId>mediscreen</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+    <!--========================================= Modules ===========================================================-->
+
+    <modules>
+        <module>medicalNotes</module>
+        <module>patientUI</module>
+        <module>patientInformation</module>
+        <module>patientRisk</module>
+    </modules>
+
+    <!-- ==============================================dependencyManagement========================================= -->
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- ===== Modules ===== -->
+            <dependency>
+                <groupId>org.exemple</groupId>
+                <artifactId>medicalNotes</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.exemple</groupId>
+                <artifactId>patientInformation</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.exemple</groupId>
+                <artifactId>patientUI</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.exemple</groupId>
+                <artifactId>patientRisk</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>4.0.0-M3</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>4.0.0-M3</version>
+            </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <site>
+            <id>mediscreen</id>
+            <url>file://C:/Users/CABROL/Documents/Justine/projet9/mediscreen/target/site</url>
+        </site>
+    </distributionManagement>
 </project>

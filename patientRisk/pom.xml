@@ -205,5 +205,10 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<distributionManagement>
+		<site>
+			<id>patientRisk</id>
+			<url>file://C:/Users/CABROL/Documents/Justine/projet9/mediscreen/patientRisk/target/site</url>
+		</site>
+	</distributionManagement>
 </project>
