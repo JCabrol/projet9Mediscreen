@@ -1,4 +1,3 @@
-#version: "1"
 services:
 
   mysql_db:

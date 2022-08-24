@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @Tag("MedicalNoteServiceTest")
@@ -163,9 +164,9 @@ public class MedicalNoteServiceTest {
             //GIVEN
             //an existing patient id with note contents
             String patientId = "patientId";
-            String content1 ="content";
-            String content2="content2";
-            String content3="content3";
+            String content1 = "content";
+            String content2 = "content2";
+            String content3 = "content3";
             MedicalNote medicalNote = new MedicalNote();
             medicalNote.setPatientId(patientId);
             medicalNote.setNoteContent(content1);
@@ -175,7 +176,7 @@ public class MedicalNoteServiceTest {
             MedicalNote medicalNote3 = new MedicalNote();
             medicalNote3.setPatientId(patientId);
             medicalNote3.setNoteContent(content3);
-            when(medicalNoteRepository.findByPatientIdOrderByNoteDateDesc(patientId)).thenReturn(List.of(medicalNote,medicalNote2,medicalNote3));
+            when(medicalNoteRepository.findByPatientIdOrderByNoteDateDesc(patientId)).thenReturn(List.of(medicalNote, medicalNote2, medicalNote3));
 
             //WHEN
             //the function getAllContentByPatient is called
@@ -183,7 +184,7 @@ public class MedicalNoteServiceTest {
 
             //THEN
             //a String containing all note contents is returned.
-            assertEquals(result, " "+content1+" "+content2+" "+content3);
+            assertEquals(result, " " + content1 + " " + content2 + " " + content3);
             //and the expected methods have been called with expected arguments
             verify(medicalNoteRepository, Mockito.times(1)).findByPatientIdOrderByNoteDateDesc(patientId);
         }

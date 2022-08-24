@@ -28,6 +28,11 @@ public class PatientController {
     @Autowired
     private PatientUIService patientUIService;
 
+    /**
+     * Get home page.
+     *
+     * @return the home page
+     */
     @GetMapping("/")
     public ModelAndView home() {
 
@@ -37,6 +42,12 @@ public class PatientController {
         return new ModelAndView(viewName, model);
     }
 
+    /**
+     * Get the page to select patient when all patient list is requested.
+     *
+     * @param currentPage the number of the page in the displayed list, default value is 1
+     * @return the select patient page with the list of all patient
+     */
     @GetMapping("/patient/getAllPatients")
     public ModelAndView allPatient(@RequestParam(defaultValue = "1") Integer currentPage) {
 
@@ -53,6 +64,13 @@ public class PatientController {
         return new ModelAndView(viewName, model);
     }
 
+    /**
+     * Submit familyName and/or givenName given in patientSearch.
+     * Redirect to getting patient with this name in attribute
+     *
+     * @param patientSearch an object containing a familyName and/or a givenName
+     * @return a redirection to "patient/getPatient"
+     */
     @PostMapping("/patient/searchPatient")
     public RedirectView searchPatientsByName(
             @Valid @ModelAttribute("patientSearch") PatientSearch patientSearch, RedirectAttributes redirectAttributes) {
@@ -65,6 +83,14 @@ public class PatientController {
         return new RedirectView("/patient/getPatient", true);
     }
 
+    /**
+     * Get the page to select patient when a search has been effectuated.
+     *
+     * @param currentPage the number of the page in the displayed list, default value is 1
+     * @param familyName not required - The family name which is researched
+     * @param givenName not required - The given name which is researched
+     * @return the select patient page with the list of patient found by research
+     */
     @GetMapping("/patient/getPatient")
     public ModelAndView getPatientsByName(@RequestParam(required = false) String familyName,
                                           @RequestParam(required = false) String givenName,
@@ -85,6 +111,15 @@ public class PatientController {
         return new ModelAndView(viewName, model);
     }
 
+    /**
+     * Get the information page concerning a patient.
+     *
+     * @param patientId the id of the patient whose page has to be displayed
+     * @param noteId not required - the id of the note to read, if a reading note is selected
+     * @param updateNoteId not required - the id of the note to update, if an updating note is selected
+     * @param currentPage the number of the page in the medical note list, default value is 1
+     * @return the patient information page with the selected displayed elements if any selected
+     */
     @GetMapping("/patient/getPatient/{patientId}")
     public ModelAndView getPatient(@PathVariable int patientId,
                                    @RequestParam(required = false) String noteId,
@@ -114,6 +149,13 @@ public class PatientController {
         return new ModelAndView(viewName, model);
     }
 
+    /**
+     * Submit a medical note to update.
+     * Redirect to the patient information page
+     *
+     * @param medicalNoteBean the medical note to update
+     * @return a redirection to "patient/getPatient/{patientId}"
+     */
     @PostMapping("/patient/updateNote")
     public RedirectView submitUpdateNote(@Valid @ModelAttribute MedicalNoteBean medicalNoteBean) {
 
@@ -124,6 +166,13 @@ public class PatientController {
         return new RedirectView("/patient/getPatient/" + patientId);
     }
 
+    /**
+     * Submit a medical note to add.
+     * Redirect to the patient information page
+     *
+     * @param medicalNoteBean the medical note to add
+     * @return a redirection to "patient/getPatient/{patientId}"
+     */
     @PostMapping("/patient/addNote")
     public RedirectView submitNewNote(@Valid @ModelAttribute MedicalNoteBean medicalNoteBean) {
 
@@ -133,6 +182,13 @@ public class PatientController {
         return new RedirectView("/patient/getPatient/" + patientId);
     }
 
+    /**
+     * Submit a new patient to add
+     * Redirect to the select patient page
+     *
+     * @param patientBean the patient to add
+     * @return a redirection to "patient/getAllPatient" if there is not any validation error, the form page to add patient with displayed error messages if there is validation error
+     */
     @PostMapping("/patient/addPatient")
     public ModelAndView createNewPatient(@Valid @ModelAttribute("patientBean") PatientBean
                                                  patientBean, BindingResult bindingResult, ModelMap model) {
@@ -149,6 +205,14 @@ public class PatientController {
         }
     }
 
+    /**
+     * Submit a patient to update
+     * Redirect to the patient page
+     *
+     * @param patientId the id of the patient to update
+     * @param patientBeanToModify an object containing information to update for the patient
+     * @return a redirection to the patient information page. If there is not any validation error, the updating form is hidden, if there are errors, the updating form is showed with error validation messages.
+     */
     @PostMapping("/patient/updatePatient/{patientId}")
     public ModelAndView updatePatient(@PathVariable int patientId,
                                       @Valid @ModelAttribute("patientBeanToModify") PatientBean patientBeanToModify, BindingResult
@@ -176,6 +240,11 @@ public class PatientController {
         }
     }
 
+    /**
+     * Displays the form to add a new patient
+     *
+     * @return the form page to add a new patient
+     */
     @GetMapping("/patient/addPatient")
     public ModelAndView addNewPatient() {
 
@@ -188,6 +257,13 @@ public class PatientController {
         return new ModelAndView(viewName, model);
     }
 
+    /**
+     * Delete a patient
+     * Redirect to the select patient page
+     *
+     * @param patientId the if of the patient to delete
+     * @return a redirection to "patient/getAllPatient"
+     */
     @GetMapping("/patient/delete/{patientId}")
     public ModelAndView deletePatient(@PathVariable int patientId) {
 
@@ -198,6 +274,14 @@ public class PatientController {
         return new ModelAndView(redirect);
     }
 
+    /**
+     * Delete a medical note
+     * Redirect to the patient information page
+     *
+     * @param patientId the if of the patient to whom the note is deleted
+     * @param noteId the id of the note to delete
+     * @return a redirection to "patient/getAllPatient"
+     */
     @GetMapping("/patient/deleteNote/{patientId}/{noteId}")
     public ModelAndView deleteNote(@PathVariable int patientId, @PathVariable String noteId) {
 

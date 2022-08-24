@@ -57,7 +57,7 @@ public class MedicalNoteControllerTest {
             when(medicalNoteService.getAllPatientNotes(patientId)).thenReturn(medicalNoteList);
 
             //WHEN
-            // WHEN the uri "/patHistory/getAllMedicalNotes/{patientId}" is called
+            //the uri "/patHistory/getAllMedicalNotes/{patientId}" is called
             mockMvc.perform(get("/patHistory/getAllMedicalNotes/" + patientId))
 
                     //THEN

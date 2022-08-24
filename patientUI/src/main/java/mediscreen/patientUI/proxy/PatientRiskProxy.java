@@ -1,12 +1,9 @@
 package mediscreen.patientUI.proxy;
 
 import mediscreen.patientUI.bean.DiabetesRiskBean;
-import mediscreen.patientUI.bean.MedicalNoteBean;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "patientRisk", url = "${patient.risk.proxy.url}")
 public interface PatientRiskProxy {

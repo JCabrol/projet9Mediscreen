@@ -3,7 +3,6 @@ package mediscreen.patientInformation.modele;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mediscreen.patientInformation.validation.ValidDateOfBirth;
 import mediscreen.patientInformation.validation.ValidPhone;
 
 import javax.persistence.*;
@@ -50,7 +49,6 @@ public class Patient {
     @Column(name = "address")
     @Size(max = 256, message = "Address cannot be over 256 characters.")
     private String address;
-
 
 
     public Patient(String familyName, String givenName, LocalDate dateOfBirth, Sex sex, String phone, String address) {

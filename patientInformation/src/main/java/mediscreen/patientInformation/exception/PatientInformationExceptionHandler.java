@@ -1,7 +1,6 @@
 package mediscreen.patientInformation.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -20,10 +19,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -81,13 +78,13 @@ public class PatientInformationExceptionHandler extends ResponseEntityExceptionH
         PatientInformationError patientInformationError = new PatientInformationError();
         patientInformationError.setStatus(BAD_REQUEST);
         List<String> allMessageError = new ArrayList<>();
-        for(FieldError fieldError:ex.getBindingResult().getFieldErrors()){
-           String errorMessage = fieldError.getDefaultMessage();
-           allMessageError.add(errorMessage);
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            String errorMessage = fieldError.getDefaultMessage();
+            allMessageError.add(errorMessage);
         }
         StringBuilder message = new StringBuilder("There is a problem with the following given data : ");
-        for (String defaultMassage :allMessageError
-             ) {
+        for (String defaultMassage : allMessageError
+        ) {
             message.append("\n- ").append(defaultMassage);
         }
         patientInformationError.setMessage(message.toString());

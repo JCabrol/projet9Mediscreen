@@ -132,7 +132,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     /**
-     * Delete - Delete a patient.
+     * Delete a patient.
      *
      * @param patientId the id of the patient to delete
      * @throws ObjectNotFoundException if the patient is not found by its id

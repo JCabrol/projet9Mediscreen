@@ -27,8 +27,15 @@ public class PatientUIServiceImpl implements PatientUIService {
         this.patientRiskProxy = patientRiskProxy;
     }
 
+    /**
+     * Get a patient by id
+     *
+     * @param patientId the id of the researched patient
+     * @return a patientBean object containing information about the patient
+     * @throws ObjectNotFoundException if the patient is not found by its id
+     */
     @Override
-    public PatientBean getPatientById(int patientId) {
+    public PatientBean getPatientById(int patientId) throws ObjectNotFoundException{
         PatientBean patientBean;
         try {
             patientBean = patientInformationProxy.getPatientById(patientId);
@@ -38,23 +45,45 @@ public class PatientUIServiceImpl implements PatientUIService {
         return patientBean;
     }
 
+    /**
+     * Get the list of all patient. If there is not any patient returns empty list
+     *
+     * @return a list of patientBean object containing information about patients
+     */
     @Override
     public List<PatientBean> getAllPatient() {
         return patientInformationProxy.getAllPatient();
     }
 
+    /**
+     * Get the list of all patient having the researched name. If there is not any corresponding patient returns empty list
+     *
+     * @return a list of patientBean object containing information about corresponding patients
+     */
     @Override
     public List<PatientBean> getPatientByName(String familyName, String givenName) {
         return patientInformationProxy.getPatientByName(familyName, givenName);
     }
 
+    /**
+     * Add a new patient
+     *
+     * @param patientBean  the patient to add
+     */
     @Override
     public void addNewPatient(PatientBean patientBean) {
         patientInformationProxy.addNewPatient(patientBean);
     }
 
+    /**
+     * Update a patient
+     *
+     * @param patientId the id of the patient to update
+     * @param patientBean the information patient to update
+     * @throws ObjectNotFoundException if the patient is not found by its id
+     */
     @Override
-    public void updatePatient(int patientId, PatientBean patientBean) {
+    public void updatePatient(int patientId, PatientBean patientBean) throws ObjectNotFoundException{
         try {
             patientInformationProxy.updatePatient(patientId, patientBean);
         } catch (FeignException.FeignClientException e) {
@@ -62,8 +91,14 @@ public class PatientUIServiceImpl implements PatientUIService {
         }
     }
 
+    /**
+     * Delete a patient
+     *
+     * @param patientId the id of the patient to delete
+     * @throws ObjectNotFoundException if the patient is not found by its id
+     */
     @Override
-    public void deletePatient(int patientId) {
+    public void deletePatient(int patientId) throws ObjectNotFoundException {
         try {
             patientInformationProxy.deletePatient(patientId);
         } catch (FeignException.FeignClientException e) {
@@ -71,8 +106,15 @@ public class PatientUIServiceImpl implements PatientUIService {
         }
     }
 
+    /**
+     * Get the diabetes risk for a patient
+     *
+     * @param patientId the id of the patient whose diabetes risk is sought
+     * @return a String indicating the diabetes risk for the patient
+     * @throws ObjectNotFoundException if the patient is not found by its id
+     */
     @Override
-    public String getDiabetesRisk(int patientId) {
+    public String getDiabetesRisk(int patientId) throws ObjectNotFoundException {
         String result;
         try {
             result = patientRiskProxy.getDiabetesRisk(patientId).name();
@@ -82,8 +124,15 @@ public class PatientUIServiceImpl implements PatientUIService {
         return result;
     }
 
+    /**
+     * Get a medical note by its id
+     *
+     * @param noteId the id of researched medical note
+     * @return a medicalNoteBean object containing all information from the note
+     * @throws ObjectNotFoundException if the medicalNote is not found by its id
+     */
     @Override
-    public MedicalNoteBean getMedicalNote(String noteId) {
+    public MedicalNoteBean getMedicalNote(String noteId) throws ObjectNotFoundException{
         MedicalNoteBean result = null;
         if (noteId != null) {
             try {
@@ -95,13 +144,26 @@ public class PatientUIServiceImpl implements PatientUIService {
         return result;
     }
 
+    /**
+     * Get the list of all medical notes about a patient. If there is not any note, returns an empty list
+     *
+     * @param patientId the id of the patient whose medical notes are sought
+     * @return a list of medicalNoteBean objects containing all information from the notes
+     */
     @Override
     public List<MedicalNoteBean> getMedicalNotesByPatient(String patientId) {
         return medicalNoteProxy.getMedicalNotesByPatient(patientId);
     }
 
+    /**
+     * Update a medical note
+     *
+     * @param noteId the id of the note to update
+     * @param noteContent the content to update
+     * @throws ObjectNotFoundException if the note is not found by its id
+     */
     @Override
-    public void updateMedicalNote(String noteId, String noteContent) {
+    public void updateMedicalNote(String noteId, String noteContent) throws ObjectNotFoundException{
         try {
             medicalNoteProxy.updateMedicalNote(noteId, noteContent);
         } catch (FeignException.FeignClientException e) {
@@ -109,13 +171,25 @@ public class PatientUIServiceImpl implements PatientUIService {
         }
     }
 
+    /**
+     * Add a medical note
+     *
+     * @param patientId the id of the patient to whom note is added
+     * @param noteContent the content of the new note
+     */
     @Override
     public void addMedicalNote(String patientId, String noteContent) {
         medicalNoteProxy.addMedicalNote(patientId, noteContent);
     }
 
+    /**
+     * Delete a medicalNote by its id
+     *
+     * @param noteId the id of note to delete
+     * @throws ObjectNotFoundException if the note is not found by its id
+     */
     @Override
-    public void deleteMedicalNote(String noteId) {
+    public void deleteMedicalNote(String noteId) throws ObjectNotFoundException {
         try {
             medicalNoteProxy.deleteMedicalNote(noteId);
         } catch (FeignException.FeignClientException e) {
@@ -123,6 +197,11 @@ public class PatientUIServiceImpl implements PatientUIService {
         }
     }
 
+    /**
+     * Replace the content of medicalNotes in a list of medicalNotes by a preview limited at 90 characters and without tags
+     *
+     * @param medicalNoteList a list of medicalNoteBean
+     */
     @Override
     public List<MedicalNoteBean> createPreviewContentList(List<MedicalNoteBean> medicalNoteList) {
         for (MedicalNoteBean medicalNote : medicalNoteList) {
@@ -138,6 +217,14 @@ public class PatientUIServiceImpl implements PatientUIService {
         return medicalNoteList;
     }
 
+    /**
+     * Calculate the elements of a list to display in function of the list's size, the number of elements by page and the active page
+     *
+     * @param pageNumber the active page
+     * @param numberOfPatientByPage the number of elements to display in a page
+     * @param patientList the list of elements
+     * @return a ListOfPatientsToDisplay object containing the sublist to display, the active page, the total number of pages and the number of the pages to display in the pagination
+     */
     @Override
     public ListOfPatientsToDisplay getPatientsToDisplay(int pageNumber, int numberOfPatientByPage, List<PatientBean> patientList) {
         int totalOfElements = patientList.size();
@@ -148,6 +235,14 @@ public class PatientUIServiceImpl implements PatientUIService {
         return new ListOfPatientsToDisplay(patientList, pageNumber, totalNumberOfPages, pagesToDisplay);
     }
 
+    /**
+     * Calculate the elements of a list to display in function of the list's size, the number of elements by page and the active page
+     *
+     * @param pageNumber the active page
+     * @param numberOfNotesByPage the number of elements to display in a page
+     * @param medicalNoteList the list of elements
+     * @return a ListOfNotesToDisplay object containing the sublist to display, the active page, the total number of pages and the number of the pages to display in the pagination
+     */
     @Override
     public ListOfNotesToDisplay getMedicalNotesToDisplay(int pageNumber, int numberOfNotesByPage, List<MedicalNoteBean> medicalNoteList) {
         int totalOfElements = medicalNoteList.size();
@@ -158,6 +253,14 @@ public class PatientUIServiceImpl implements PatientUIService {
         return new ListOfNotesToDisplay(medicalNoteList, pageNumber, totalNumberOfPages, pagesToDisplay);
     }
 
+    /**
+     * Calculate the first and last elements to display in a list, and the total number of pages
+     *
+     * @param totalOfElements the number of elements in the list
+     * @param pageNumber the active page
+     * @param numberOfElementsByPage the number of elements to display in a page
+     * @return a Hashmap containing the rank of first and last elements to display and the total number of pages
+     */
     private HashMap<String, Integer> getPaginatedElementList(int totalOfElements, int pageNumber, int numberOfElementsByPage) {
 
         int totalNumberOfPage = totalOfElements / numberOfElementsByPage;
@@ -188,6 +291,13 @@ public class PatientUIServiceImpl implements PatientUIService {
         return result;
     }
 
+    /**
+     * Calculate the numbers of the pages to display in pagination
+     *
+     * @param totalNumberOfPage the total number of pages
+     * @param pageNumber the active page
+     * @return an array containing the 3 numbers to display
+     */
     private Integer[] getPagesToDisplay(int totalNumberOfPage, int pageNumber) {
         Integer[] pagesToDisplay = new Integer[3];
         if (totalNumberOfPage < 3) {
@@ -201,14 +311,12 @@ public class PatientUIServiceImpl implements PatientUIService {
                 }
             } else {
                 if (pageNumber == totalNumberOfPage) {
-                    for (int i = totalNumberOfPage - 1; i >= totalNumberOfPage - 3; i--) {
-                        pagesToDisplay[i] = i + 1;
+                    for (int i = 0; i < 3; i++) {
+                        pagesToDisplay[i] = i + pageNumber - 2;
                     }
                 } else {
-
                     for (int i = 0; i < 3; i++) {
                         pagesToDisplay[i] = i + pageNumber - 1;
-
                     }
                 }
             }
