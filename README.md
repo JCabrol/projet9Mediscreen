@@ -11,8 +11,8 @@ The main skills acquired with this project were:
 
 More information about the project:
 
-* Here is the [technical documentation]() I made for this project.
-* Here are the [presentation slideshows]() I made for this project.
+* Here is the [documentation](https://github.com/JCabrol/projet9Mediscreen/blob/master/Cabrol_Justine_4_documentation_072022.pdf) I made for this project.
+* Here are the [presentation slideshows](https://github.com/JCabrol/projet9Mediscreen/blob/master/PresentationApplicationMediscreen.pdf) I made for this project.
 
 ## Technical specifications
 
